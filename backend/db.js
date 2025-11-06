@@ -1,8 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const USE_FILE_PERSISTENCE = false; // Change to true if you want to save cart on server restart
-
+const USE_FILE_PERSISTENCE = false; // Change to true if you want cart saved across server restarts
 const dataFile = path.join(__dirname, 'data.json');
 
 const defaultState = {
@@ -17,9 +16,7 @@ const defaultState = {
 
 function load() {
   if (USE_FILE_PERSISTENCE && fs.existsSync(dataFile)) {
-    try {
-      return JSON.parse(fs.readFileSync(dataFile, 'utf8'));
-    } catch {}
+    try { return JSON.parse(fs.readFileSync(dataFile, 'utf8')); } catch {}
   }
   return JSON.parse(JSON.stringify(defaultState));
 }
